@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ControllerTestTemplate {
@@ -28,9 +27,8 @@ public class ControllerTestTemplate {
 
     @Test
     void GetMediaFechaPorPoblacionDTO_ThenReturn200() throws Exception{
-        mockMvc.perform(get("/media/mes/{ciudad}"), meteologiaDto.ciudad())
-                .andExpect(MediaType.APPLICATION_JSON)
-                .andExpect(status().isOk())
-                .andExpect()
+        mockMvc.perform(MockMvcRequestBuilders.get(("/meteo/media/mes/{ciudad}"), meteologiaDto.ciudad())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
