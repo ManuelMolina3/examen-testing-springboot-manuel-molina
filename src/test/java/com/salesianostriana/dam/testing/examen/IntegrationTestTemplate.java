@@ -15,6 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("integration-test")
 class IntegrationTestTemplate {
 
+	/*
+	@PutMapping("/edit")
+    public GetDatoMeteoDto edit(@Valid @RequestBody EditDatoMeteorologicoDto editado) {
+        return GetDatoMeteoDto.of(servicio.editar(editado));
+    }*/
+
 	@LocalServerPort
 	private int port;
 
@@ -29,6 +35,8 @@ class IntegrationTestTemplate {
 
 	@Test
 	void test() {
+
+
 		assertTrue(true);
 	}
 
