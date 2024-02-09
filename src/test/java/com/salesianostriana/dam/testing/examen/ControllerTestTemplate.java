@@ -1,9 +1,15 @@
 package com.salesianostriana.dam.testing.examen;
 
 
+import com.salesianostriana.dam.testing.examen.dto.GetMediaFechaPoblacionDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ControllerTestTemplate {
 
@@ -13,12 +19,18 @@ public class ControllerTestTemplate {
         return GetMediaFechaPoblacionDto.of(ciudad, servicio.mediaMensual(ciudad));
     }*/
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
 
+    private GetMediaFechaPoblacionDto meteologiaDto;
 
 
     @Test
     void GetMediaFechaPorPoblacionDTO_ThenReturn200() throws Exception{
-
+        mockMvc.perform(get("/media/mes/{ciudad}"), meteologiaDto.ciudad())
+                .andExpect(MediaType.APPLICATION_JSON)
+                .andExpect(status().isOk())
+                .andExpect()
     }
 }
